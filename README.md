@@ -1,14 +1,30 @@
 # Wave-Application
 Projeto Wave - Divulgação de Eventos
-Descrição
+Descrição:
 O projeto Wave é uma aplicação desenvolvida em Spring Boot que permite a divulgação de eventos. Ele utiliza a API da Twilio para enviar mensagens pelo WhatsApp e a funcionalidade de e-mail do JavaMailSender para enviar e-mails. Além disso, o projeto faz uso de um banco de dados MySQL para armazenamento de dados.
 
-Pré-requisitos
+Pré-requisitos:
 Java Development Kit (JDK) 8 ou superior
 Maven
 MySQL Server
+
+
 Conta na Twilio com as credenciais necessárias para enviar mensagens pelo WhatsApp
 Configurações de e-mail SMTP para o envio de e-mails pelo JavaMailSender
+CONFIG PROPERTIES:
+#config twilio
+twilio.accountSid=<your Sid Twilio>
+twilio.authToken=<your Token Twilio>
+twilio.phoneNumber=<number Twilio>
+
+#config EmailSend
+spring.mail.host=<yout host>
+spring.mail.port=587
+spring.mail.username=<your userName>
+spring.mail.password=<your userName>
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+
 Instalação e Configuração
 Faça o clone deste repositório para o seu ambiente local.
 Certifique-se de ter o MySQL Server instalado e em execução em sua máquina.
