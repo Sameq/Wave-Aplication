@@ -38,6 +38,9 @@ Faça o clone deste repositório para o seu ambiente local.
 - spring.mail.properties.mail.smtp.auth=true
 - spring.mail.properties.mail.smtp.starttls.enable=true
 
+# Twilio
+- crie uma conta na Twilio
+- cadastre seu numero na Twilio
 
 - Compile o projeto usando o Maven: mvn clean install.
 - Execute o projeto Spring Boot: mvn spring-boot:run.
