@@ -2,10 +2,10 @@ package com.br.spring.wave.domain;
 
 import com.br.spring.wave.dto.UserDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
 @Entity
 @Table
@@ -13,17 +13,35 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @NotBlank
+    @Size(max = 20)
     private String fistName;
+
+    @NotBlank
+    @Size(max = 60)
     private String lastName;
+
+    @NotBlank
+    @Size(max = 20)
     @Column(unique = true)
     private String numberPhone;
+
+    @NotBlank
+    @Size(max = 255)
+    @Email
     @Column(unique = true)
     private String email;
+
+    @NotBlank
     private String password;
+
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
@@ -35,4 +53,6 @@ public class User {
         this.password = user.password();
         this.userType = user.userType();
     }
+
+
 }

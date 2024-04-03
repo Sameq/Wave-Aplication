@@ -19,7 +19,7 @@ public class ServiceWhatsappTwilio {
     public void sendMenssage(String to, String messageBody){
         Twilio.init(accountSid,authToken);
         Message message = Message.creator(
-                new com.twilio.type.PhoneNumber("whatsapp:+557491470833"),//poe seu numero aqui
+                new com.twilio.type.PhoneNumber("whatsapp:+5574999177175"),//poe seu numero aqui
                 new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),// numero twilio teste
                 messageBody
         ).create();

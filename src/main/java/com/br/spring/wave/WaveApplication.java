@@ -9,6 +9,7 @@ public class WaveApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WaveApplication.class, args);
+
 	}
 
 }
