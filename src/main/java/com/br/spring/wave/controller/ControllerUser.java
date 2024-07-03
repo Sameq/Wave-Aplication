@@ -1,6 +1,7 @@
 package com.br.spring.wave.controller;
 
-import com.br.spring.wave.domain.User;
+import com.br.spring.wave.domain.Users;
+import com.br.spring.wave.dto.AuthDto;
 import com.br.spring.wave.dto.EmailDTO;
 import com.br.spring.wave.dto.MessageRequestDTO;
 import com.br.spring.wave.dto.UserDTO;
@@ -41,41 +42,41 @@ public class ControllerUser {
     ServiceCadastroUser serviceCadastroUser;
 
     @PostMapping("/saveUser")
-    public ResponseEntity<User> saveUser(@RequestBody UserDTO user){
-        User newUser = this.serviceUser.createUser(user);
-        serviceWhatsappTwilio.sendMenssage(newUser.getNumberPhone(), "Seja bem vindo ao Wave");
-        serviceEmail.sendEmail(user.email());
+    public ResponseEntity<Users> saveUser(@RequestBody Users user){
+        Users newUser = this.serviceUser.createUser(user);
+        //serviceWhatsappTwilio.sendMenssage(newUser.getNumberPhone(), "Seja bem vindo ao Wave");
+        //serviceEmail.sendEmail(user.getEmail());
         return ResponseEntity.ok().body(newUser);
     }
 
     @PostMapping("/send-message")
     public String sendMessage(@RequestBody MessageRequestDTO messageRequest) {
-        serviceWhatsappTwilio.sendMenssage(messageRequest.to(), messageRequest.messageBody());
+        //serviceWhatsappTwilio.sendMenssage(messageRequest.to(), messageRequest.messageBody());
         return "Message sent successfully!";
     }
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody EmailDTO email){
-         return ResponseEntity.status(HttpStatus.OK).body("Usuário logado");
+    public ResponseEntity<?> login(@RequestBody AuthDto user){
+         return ResponseEntity.ok(serviceUser.auth(user));
     }
 
     @GetMapping("/listar")
-    public List<User> listar(){
+    public List<Users> listar(){
         return repositoryUser.findAll();
     } //buscar todos os users
 
     @GetMapping("/buscarNome")
-    public List<User> buscarFistName(){
+    public List<Users> buscarFistName(){
         return repositoryUser.findByFistName("Maria");
     } //buscar por user com esse primeiro nome
 
     @GetMapping("/buscarNomeContendo")
-    public List<User> buscarNomeContendo(){
+    public List<Users> buscarNomeContendo(){
         return repositoryUser.findByLastNameContaining("Nova");
     } //buscar por users contedo esse nome
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> buscarPorId(@PathVariable Long userId){
-        Optional<User> user = repositoryUser.findById(userId);
+    public ResponseEntity<Users> buscarPorId(@PathVariable Long userId){
+        Optional<Users> user = repositoryUser.findById(userId);
 
         if(user.isPresent()){
             return ResponseEntity.ok(user.get());
@@ -86,13 +87,13 @@ public class ControllerUser {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public User adicionar(@Valid @RequestBody User user){
+    public Users adicionar(@Valid @RequestBody Users user){
         return serviceCadastroUser.salvar(user);
     } //adicionar um user
 
     @PutMapping("/{userId}")
-    public ResponseEntity<User> atualizar(@PathVariable Long userId,
-                                          @Valid @RequestBody User user){
+    public ResponseEntity<Users> atualizar(@PathVariable Long userId,
+                                           @Valid @RequestBody Users user){
         if(!repositoryUser.existsById(userId)){
             return ResponseEntity.notFound().build();
         }
@@ -115,7 +116,7 @@ public class ControllerUser {
     }
 
     @ExceptionHandler(NegocioException.class)
-    public ResponseEntity<String> capturarExeção(NegocioException e){
+    public ResponseEntity<String> capturarExceção(NegocioException e){
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 

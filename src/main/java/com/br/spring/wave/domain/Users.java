@@ -7,17 +7,19 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+
 @Entity
+@Builder
 @Table
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class User {
+public class Users {
     @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
@@ -45,7 +47,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    public User(UserDTO user) {
+    public Users(UserDTO user) {
         this.fistName = user.fistName();
         this.lastName = user.lastName();
         this.numberPhone = user.numberPhone();

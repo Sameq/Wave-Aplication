@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServiceWhatsappTwilio {
-    @Value("${twilio.accountSid}")
+    //@Value("${twilio.accountSid}")
     private String accountSid;
 
-    @Value("${twilio.authToken}")
+    //@Value("${twilio.authToken}")
     private String authToken;
 
-    @Value("${twilio.phoneNumber}")
+    //@Value("${twilio.phoneNumber}")
     private String twilioPhoneNumber;
 
     public void sendMenssage(String to, String messageBody){
